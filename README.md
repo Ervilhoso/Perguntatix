@@ -1,7 +1,6 @@
-﻿# Perguntatix
- import tkinter as tk
+import tkinter as tk
+from tkinter import PhotoImage
 import threading
-
 
 perguntas = {
     "Qual é a capital do Brasil?": ["a) São Paulo", "b) Rio de Janeiro", "c) Brasília", "d) Belo Horizonte"],
@@ -49,6 +48,7 @@ def iniciar_jogo():
     botao_inicio.pack_forget()  
     for botao in opcoes_botao:
         botao.pack()  
+    imagem_fundo_label.pack_forget()  
     proxima_pergunta()
 
 def reiniciar_jogo():
@@ -84,12 +84,6 @@ def verificar_resposta(escolha):
         pontuacao += 1
     proxima_pergunta()
 
-def toggle_fullscreen():
-    global fullscreen
-    fullscreen = not fullscreen
-    janela.attributes("-fullscreen", fullscreen)
-    update_ui()
-
 def update_ui():
     global fullscreen
     menu_label.config(font=('Helvetica', 18 if fullscreen else 16))
@@ -99,22 +93,23 @@ def update_ui():
         botao.config(font=('Helvetica', 16 if fullscreen else 14), height=2, width=30 if fullscreen else 20)
     resultado_label.config(font=('Helvetica', 16 if fullscreen else 14))
     visor_tempo.config(font=('Helvetica', 14 if fullscreen else 12))
-    botao_fullscreen.config(text="Sair da Tela Cheia" if fullscreen else "Entrar na Tela Cheia", font=('Helvetica', 10))
 
 
 janela = tk.Tk()
 janela.title("Jogo de Perguntas e Respostas")
 
-
 janela.configure(bg='navy')  
 
 
+imagem_fundo = PhotoImage(file=r"C:\Users\sapat\Downloads\Raquel.png")
+imagem_fundo_label = tk.Label(janela, image=imagem_fundo)
+imagem_fundo_label.place(relwidth=1, relheight=1)
+
 menu_label = tk.Label(janela, text="Bem-vindo ao PERGUNTATRIX!", fg='white', bg='navy')
-menu_label.pack(pady=20)
+menu_label.pack(pady=10)
 
 botao_inicio = tk.Button(janela, text="Iniciar Jogo", command=iniciar_jogo, fg='black', bg='yellow', font=('Helvetica', 14), height=2, width=20)
 botao_inicio.pack()
-
 
 pergunta_label = tk.Label(janela, text="", fg='white', bg='navy')
 pergunta_label.pack(pady=10)
@@ -125,22 +120,15 @@ for _ in range(4):
     botao.pack(pady=(10 if fullscreen else 5))  
     opcoes_botao.append(botao)
 
-
 resultado_label = tk.Label(janela, text="", fg='white', bg='navy')
 resultado_label.pack(pady=10)
-
 
 visor_tempo = tk.Label(janela, text="", fg='white', bg='navy')
 visor_tempo.pack(pady=10)
 
-
 botao_reiniciar = tk.Button(janela, text="Reiniciar Jogo", command=reiniciar_jogo, fg='black', bg='yellow')
 botao_reiniciar.pack()
 botao_reiniciar.pack_forget()  
-
-
-botao_fullscreen = tk.Button(janela, text="Entrar na Tela Cheia", command=toggle_fullscreen, fg='black', bg='yellow', font=('Helvetica', 10))
-botao_fullscreen.pack(side=tk.LEFT, padx=10, pady=10)
 
 janela.mainloop()
 
