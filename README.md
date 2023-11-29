@@ -19,7 +19,7 @@ pontuacao = 0
 pergunta_atual = 0
 perguntas_keys = list(perguntas.keys())
 
-tempo_por_pergunta = 20  
+tempo_por_pergunta = 10  
 tempo_restante = tempo_por_pergunta  
 timer = None
 fullscreen = False  
