@@ -1,27 +1,46 @@
 import tkinter as tk
-from tkinter import PhotoImage
 import threading
+import random
 
 perguntas = {
-    "Qual é a capital do Brasil?": ["a) São Paulo", "b) Rio de Janeiro", "c) Brasília", "d) Belo Horizonte"],
-    "Qual é o maior planeta do sistema solar?": ["a) Terra", "b) Vênus", "c) Marte", "d) Júpiter"],
-    "Qual é o animal terrestre mais rápido?": ["a) Leopardo", "b) Guepardo", "c) Leão", "d) Elefante"]
+    "Matemática": {
+        "Pergunta 1": ["a) Resposta 1", "b) Resposta 2", "c) Resposta 3", "d) Resposta 4"],
+        
+    },
+    "História": {
+        "Pergunta 1": ["a) Resposta 1", "b) Resposta 2", "c) Resposta 3", "d) Resposta 4"],
+        
+    },
+    "Português": {
+        "Pergunta 1": ["a) Resposta 1", "b) Resposta 2", "c) Resposta 3", "d) Resposta 4"],
+        
+    },
+    "Ciências": {
+        "Qual é o maior planeta do sistema solar?": ["a) Terra", "b) Vênus", "c) Marte", "d) Júpiter"],
+        
+    },
+    "Esporte": {
+        "Pergunta 1": ["a) Resposta 1", "b) Resposta 2", "c) Resposta 3", "d) Resposta 4"],
+        
+    },
+    "Perguntatrix": {
+        "Pergunta 1": ["a) Resposta 1", "b) Resposta 2", "c) Resposta 3", "d) Resposta 4"],
+        
+    }
 }
 
 respostas = {
-    "Qual é a capital do Brasil?": "c",
     "Qual é o maior planeta do sistema solar?": "d",
-    "Qual é o animal terrestre mais rápido?": "b"
 }
 
 pontuacao = 0
 pergunta_atual = 0
-perguntas_keys = list(perguntas.keys())
-
-tempo_por_pergunta = 10  
+perguntas_selecionadas = []
+tempo_por_pergunta = 10  # Defina o tempo limite para cada pergunta em segundos
 tempo_restante = tempo_por_pergunta  
 timer = None
-fullscreen = False  
+fullscreen = False 
+modo_selecionado = ""  
 
 def iniciar_timer():
     global timer, tempo_restante
@@ -40,49 +59,70 @@ def atualizar_tempo():
 def tempo_expirado():
     proxima_pergunta()
 
-def iniciar_jogo():
-    global pontuacao, pergunta_atual, tempo_restante
-    pontuacao = 0
-    pergunta_atual = 0
-    tempo_restante = tempo_por_pergunta
-    botao_inicio.pack_forget()  
+def mostrar_botao_opcoes():
     for botao in opcoes_botao:
-        botao.pack()  
-    imagem_fundo_label.pack_forget()  
-    proxima_pergunta()
+        botao.pack(pady=(20 if fullscreen else 10))  
+        visor_tempo.pack(pady=(20 if fullscreen else 10))  
+        botao_reiniciar.pack(pady=(20 if fullscreen else 10))  
+        botao_reiniciar.pack_forget()
 
+def iniciar_jogo(modo):
+    global pontuacao, pergunta_atual, tempo_restante, perguntas_selecionadas, modo_selecionado
+    modo_selecionado = modo
+    if modo_selecionado:
+        pontuacao = 0
+        pergunta_atual = 0
+        tempo_restante = tempo_por_pergunta
+        perguntas_selecionadas = random.sample(list(perguntas[modo_selecionado].keys()), len(perguntas[modo_selecionado]))
+        
+        
+        menu_label.config(text=modo_selecionado.capitalize())
+
+        for botao in botoes_modo:
+            botao.pack_forget()  
+        for botao in opcoes_botao:
+            botao.pack()  
+        proxima_pergunta()
+        mostrar_botao_opcoes()  
+        
 def reiniciar_jogo():
-    iniciar_jogo()
+    iniciar_jogo(modo_selecionado)
     resultado_label.config(text="")
     botao_reiniciar.pack_forget()  
 
 def proxima_pergunta():
-    global pergunta_atual, timer, tempo_restante
+    global pergunta_atual, timer, tempo_restante, perguntas_selecionadas
     if timer:
         timer.cancel()  
 
-    if pergunta_atual < len(perguntas):
-        pergunta = perguntas_keys[pergunta_atual]
-        opcoes = perguntas[pergunta]
+    if pergunta_atual < len(perguntas_selecionadas):
+        pergunta = perguntas_selecionadas[pergunta_atual]
+        opcoes = perguntas[modo_selecionado][pergunta]
         pergunta_label.config(text=pergunta, fg='white', bg='navy', font=('Helvetica', 18 if fullscreen else 16))
         for i, opcao in enumerate(opcoes):
             opcoes_botao[i].config(text=opcao, command=lambda i=i: verificar_resposta(i), fg='black', bg='yellow', font=('Helvetica', 16 if fullscreen else 14), height=2, width=30 if fullscreen else 20)
         
         tempo_restante = tempo_por_pergunta
         visor_tempo.config(text=f"Tempo restante: {tempo_restante} s", fg='white', bg='navy', font=('Helvetica', 14 if fullscreen else 12))
-        janela.title(f"Jogo de Perguntas e Respostas - Tempo Restante: {tempo_restante} s")
+        janela.title(f"PERGUNTATRIX - JOGO DE PERGUNTAS E RESPOSTAS")
         iniciar_timer()
         pergunta_atual += 1
     else:
-        resultado_label.config(text=f"Sua pontuação final é: {pontuacao}/{len(perguntas)}", fg='white', bg='navy', font=('Helvetica', 16 if fullscreen else 14))
-        botao_reiniciar.pack()  
+        resultado_label.config(text=f"Sua pontuação final é: {pontuacao}/{len(perguntas_selecionadas)}", fg='white', bg='navy', font=('Helvetica', 16 if fullscreen else 14))
+        botao_reiniciar.pack()  # Mostra o botão de reiniciar
 
 def verificar_resposta(escolha):
     global pontuacao
-    resposta_correta = respostas[perguntas_keys[pergunta_atual - 1]]
+    resposta_correta = respostas[perguntas_selecionadas[pergunta_atual - 1]]
     if escolha == ord(resposta_correta) - ord('a'):
         pontuacao += 1
     proxima_pergunta()
+
+def toggle_fullscreen():
+    global fullscreen
+    fullscreen = not fullscreen
+    janela.attributes("-fullscreen", fullscreen)
+    update_ui()
 
 def update_ui():
     global fullscreen
@@ -96,20 +136,27 @@ def update_ui():
 
 
 janela = tk.Tk()
-janela.title("Jogo de Perguntas e Respostas")
+janela.title("PERGUNTATRIX - JOGO DE PERGUNTAS E RESPOSTAS")
+
 
 janela.configure(bg='navy')  
 
 
-imagem_fundo = PhotoImage(file=r"C:\Users\sapat\Downloads\Raquel.png")
-imagem_fundo_label = tk.Label(janela, image=imagem_fundo)
-imagem_fundo_label.place(relwidth=1, relheight=1)
+menu_label = tk.Label(janela, text="Escolha o Modo:", fg='white', bg='navy', font=('Helvetica', 18))
+menu_label.pack(pady=20)
 
-menu_label = tk.Label(janela, text="Bem-vindo ao PERGUNTATRIX!", fg='white', bg='navy')
-menu_label.pack(pady=10)
 
-botao_inicio = tk.Button(janela, text="Iniciar Jogo", command=iniciar_jogo, fg='black', bg='yellow', font=('Helvetica', 14), height=2, width=20)
-botao_inicio.pack()
+botoes_modo = []
+for modo in perguntas.keys():
+    botao_modo = tk.Button(janela, text=modo, command=lambda modo=modo: iniciar_jogo(modo), fg='black', bg='yellow', font=('Helvetica', 14))
+    botao_modo.pack(pady=10)
+    botoes_modo.append(botao_modo)
+
+
+botao_reiniciar = tk.Button(janela, text="Reiniciar Jogo", command=reiniciar_jogo, fg='black', bg='yellow')
+botao_reiniciar.pack()
+botao_reiniciar.pack_forget()  
+
 
 pergunta_label = tk.Label(janela, text="", fg='white', bg='navy')
 pergunta_label.pack(pady=10)
@@ -117,7 +164,7 @@ pergunta_label.pack(pady=10)
 opcoes_botao = []
 for _ in range(4):
     botao = tk.Button(janela, text="", fg='black', bg='yellow')
-    botao.pack(pady=(10 if fullscreen else 5))  
+    botao.pack_forget()  
     opcoes_botao.append(botao)
 
 resultado_label = tk.Label(janela, text="", fg='white', bg='navy')
@@ -125,10 +172,6 @@ resultado_label.pack(pady=10)
 
 visor_tempo = tk.Label(janela, text="", fg='white', bg='navy')
 visor_tempo.pack(pady=10)
-
-botao_reiniciar = tk.Button(janela, text="Reiniciar Jogo", command=reiniciar_jogo, fg='black', bg='yellow')
-botao_reiniciar.pack()
-botao_reiniciar.pack_forget()  
 
 janela.mainloop()
 
