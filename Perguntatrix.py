@@ -245,7 +245,7 @@ def update_ui():
 janela = tk.Tk()
 janela.title("PERGUNTATRIX - JOGO DE PERGUNTAS E RESPOSTAS")
 
-janela.configure(bg='navy')  # Azul escuro
+janela.configure(bg='navy')  
 
 menu_label = tk.Label(janela, text="Escolha o Modo:", fg='white', bg='navy', font=('Helvetica', 18))
 menu_label.pack(pady=20)
@@ -258,7 +258,7 @@ for modo in perguntas.keys():
 
 botao_reiniciar = tk.Button(janela, text="Reiniciar Jogo", command=reiniciar_jogo, fg='black', bg='yellow')
 botao_reiniciar.pack()
-botao_reiniciar.pack_forget()  # Esconde o botão de reiniciar inicialmente
+botao_reiniciar.pack_forget()  
 
 pergunta_label = tk.Label(janela, text="", fg='white', bg='navy')
 pergunta_label.pack(pady=10)
