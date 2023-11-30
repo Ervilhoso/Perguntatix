@@ -65,16 +65,16 @@ perguntas = {
     "Qual país sediou as Olimpíadas de 2016?": ["a) Estados Unidos", "b) China", "c) Rússia", "d) Brasil"]
 },
     "Perguntatrix": { 
+    "Qual é a propriedade associativa da adição?": ["a) Comutativa", "b) Distributiva", "c) Associativa", "d) Identidade"],
+    "O que é um átomo?": ["a) Partícula subatômica", "b) Molécula", "c) Elemento químico", "d) Íon"],
+    "Quem foi o primeiro imperador do Brasil?": ["a) Dom Pedro II", "b) Dom Pedro I", "c) Getúlio Vargas", "d) Tiradentes"],
     "Qual alternativa apresenta um verbo de ligação?": ["a) Corre", "b) Está", "c) Come", "d) Vive"],
-    "O que é um sujeito indeterminado na frase?": ["a) Não possui sujeito", "b) Sujeito oculto", "c) Sujeito composto", "d) Sujeito simples"],
-    "Qual é a função da conjunção subordinativa condicional?": ["a) Estabelecer comparação", "b) Indicar causa", "c) Expressar condição", "d) Marcar tempo"],
-    "O que caracteriza um discurso direto?": ["a) Fala de um narrador", "b) Reprodução fiel da fala de alguém", "c) Uso de aspas", "d) Interação com o leitor"],
-    "O que é uma antítese na construção de frases?": ["a) Repetição de palavras", "b) Contraste de ideias", "c) Uso de sinônimos", "d) Expressão de causa"],
-    "Qual é a função do pronome relativo 'que' na frase?": ["a) Indicar posse", "b) Estabelecer uma condição", "c) Conectar termos da frase", "d) Expressar quantidade"],
-    "O que é uma elipse no contexto da língua portuguesa?": ["a) Figura de linguagem", "b) Omissão de termos", "c) Uso de pleonasmo", "d) Ambiguidade na frase"],
-    "Qual é o antônimo de 'efêmero'?": ["a) Permanente", "b) Rápido", "c) Breve", "d) Passageiro"],
-    "O que caracteriza uma oração subordinada adjetiva restritiva?": ["a) Adiciona informação essencial", "b) Indica uma condição", "c) Pode ser omitida sem prejuízo", "d) Inicia a frase"],
-    "O que é uma metáfora na linguagem figurada?": ["a) Comparação direta", "b) Repetição de palavras", "c) Uso de conjunções", "d) Expressão literal"]
+    "Qual esporte utiliza uma bola redonda?": ["a) Futebol", "b) Basquete", "c) Tênis", "d) Golfe"],
+    "Qual é a fórmula da água?": ["a) H2O2", "b) CO2", "c) H2O", "d) O2"],
+    "Quem foi o líder da independência do Brasil?": ["a) Tiradentes", "b) Dom Pedro I", "c) Getúlio Vargas", "d) Joaquim Nabuco"],
+    "O que é um número irracional?": ["a) Número inteiro", "b) Número decimal", "c) Número fracionário", "d) Não pode ser expresso como fração"],
+    "Quem é considerado o maior jogador de basquete de todos os tempos?": ["a) LeBron James", "b) Michael Jordan", "c) Kobe Bryant", "d) Shaquille O'Neal"],
+    "O que é uma antítese na construção de frases?": ["a) Repetição de palavras", "b) Contraste de ideias", "c) Uso de sinônimos", "d) Expressão de causa"]
 }
 
 }
