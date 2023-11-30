@@ -278,4 +278,4 @@ visor_tempo.pack(pady=10)
 janela.mainloop()
 
 # Perguntatix
-++
+
