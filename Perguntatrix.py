@@ -199,6 +199,22 @@ respostas = {
     "O que é uma progressão aritmética?": "a",
     "Qual é a definição de mediana em um conjunto de dados?": "c",
     "O que é uma circunferência?": "c",
+    #Perguntatrix
+    "O que é a média aritmética?": "a",
+    "O que é uma fração equivalente?": "c",
+    "O que é o Teorema de Pitágoras?": "b",
+    "Quem foi o presidente do Brasil durante a Proclamação da República em 1889?": "b",
+    "O que representou o movimento Tenentista na década de 1920?": "a",
+    "Qual foi o objetivo da política de industrialização implementada durante o governo de Juscelino Kubitschek?": "a",
+    "Em qual alternativa a palavra está escrita corretamente?": "b",
+    "Qual é o plural correto de papel?": "a",
+    "O que é um sinônimo para a palavra alegre?": "b",
+    "O que é a lei da inércia e como ela se aplica aos objetos em movimento?": "a",
+    "Explique a diferença entre velocidade e aceleração.": "a",
+    "Como a energia térmica se propaga e é transferida entre corpos?": "b",
+    "Qual país sediará os Jogos Olímpicos de Verão de 2028?": "c",
+    "Qual é o recorde de mais gols marcados em uma única edição da Copa do Mundo de Futebol Masculino?": "d",
+    "Em que ano o Brasil sediou os Jogos Olímpicos pela primeira vez?": "c",
 
 }
 
@@ -346,3 +362,4 @@ visor_tempo.pack(pady=10)
 janela.mainloop()
 
 # Perguntatix
+++
